@@ -1,0 +1,12 @@
+{
+  "Items": [
+    {
+      "id": 999,
+      "title": "🔥 Amit Super Laptop",
+      "price": 9999,
+      "cat": "notebook",
+      "desc": "Mocked super laptop for contract testing",
+      "img": "test.png"
+    }
+  ]
+}

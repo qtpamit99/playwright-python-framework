@@ -1,0 +1,13 @@
+products:
+
+  - category: "Laptops"
+    product_name: "Sony vaio i5"
+
+  - category: "Laptops"
+    product_name: "Dell i7 8gb"
+#
+#  - category: "Phones"
+#    product_name: "Samsung galaxy s6"
+#
+#  - category: "Phones"
+#    product_name: "Nexus 6"

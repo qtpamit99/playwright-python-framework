@@ -1,0 +1,3 @@
+INFO     framework_logger:test_product_schema.py:16 🌐 API SCHEMA VALIDATION STARTED
+INFO     framework_logger:test_product_schema.py:24 📦 Products Received → 7
+INFO     framework_logger:test_product_schema.py:34 ✅ API SCHEMA VALIDATION PASSED

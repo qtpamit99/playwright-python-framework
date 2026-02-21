@@ -1,0 +1,3 @@
+INFO     framework_logger:test_products_api.py:16 🌐 PRODUCT API SCHEMA TEST STARTED
+INFO     framework_logger:test_products_api.py:28 📦 Products Received → 7
+INFO     framework_logger:test_products_api.py:39 ✅ PRODUCT API SCHEMA TEST PASSED

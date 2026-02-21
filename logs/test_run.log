@@ -1,0 +1,76 @@
+[INFO] 13:03:26 | 🔗 CONTRACT TEST → Sony vaio i5
+[INFO] 13:03:26 | Selecting category: Laptops
+[INFO] 13:03:27 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 13:03:29 | UI Title → Sony vaio i5
+[INFO] 13:03:29 | UI Price → 790
+[INFO] 13:03:29 | API Price → 790
+[INFO] 13:03:31 | 🔗 CONTRACT TEST → Dell i7 8gb
+[INFO] 13:03:31 | Selecting category: Laptops
+[INFO] 13:03:32 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 13:03:33 | UI Title → Dell i7 8gb
+[INFO] 13:03:33 | UI Price → 700
+[INFO] 13:03:34 | API Price → 700
+[INFO] 13:08:13 | 🔗 CONTRACT TEST → Sony vaio i5
+[INFO] 13:08:13 | Selecting category: Laptops
+[INFO] 13:08:14 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 13:08:16 | UI Title → Sony vaio i5
+[INFO] 13:08:16 | UI Price → 790
+[INFO] 13:08:17 | API Price → 790
+[INFO] 13:08:18 | 🔗 CONTRACT TEST → Dell i7 8gb
+[INFO] 13:08:18 | Selecting category: Laptops
+[INFO] 13:08:19 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 13:08:21 | UI Title → Dell i7 8gb
+[INFO] 13:08:21 | UI Price → 700
+[INFO] 13:08:21 | API Price → 700
+[INFO] 13:13:45 | 🌐 API SCHEMA VALIDATION STARTED
+[INFO] 13:13:46 | 📦 Products Received → 7
+[INFO] 13:13:46 | ✅ API SCHEMA VALIDATION PASSED
+[INFO] 13:14:23 | 🌐 API SCHEMA VALIDATION STARTED
+[INFO] 13:14:24 | 📦 Products Received → 7
+[INFO] 13:14:24 | ✅ API SCHEMA VALIDATION PASSED
+[INFO] 13:38:27 | 🌐 API SCHEMA VALIDATION STARTED
+[INFO] 13:38:27 | 📦 Products Received → 7
+[INFO] 13:38:27 | ✅ API SCHEMA VALIDATION PASSED
+[INFO] 13:38:49 | 🌐 PRODUCT API SCHEMA TEST STARTED
+[INFO] 13:38:49 | 📦 Products Received → 7
+[INFO] 13:38:49 | ✅ PRODUCT API SCHEMA TEST PASSED
+[INFO] 13:40:03 | Reloading Home Page
+[INFO] 13:40:04 | Selecting category: Laptops
+[INFO] 13:40:04 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:40:07 | Reloading Home Page
+[INFO] 13:40:07 | Selecting category: Laptops
+[INFO] 13:40:07 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:40:09 | Reloading Home Page
+[INFO] 13:50:32 | 🔗 CONTRACT TEST → Sony vaio i5
+[INFO] 13:50:32 | Selecting category: Laptops
+[INFO] 13:50:33 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 13:50:34 | UI Title → Sony vaio i5
+[INFO] 13:50:34 | UI Price → 790
+[INFO] 13:50:35 | API Price → 790
+[INFO] 13:50:36 | 🔗 CONTRACT TEST → Dell i7 8gb
+[INFO] 13:50:36 | Selecting category: Laptops
+[INFO] 13:50:37 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:50:39 | UI Title → Dell i7 8gb
+[INFO] 13:50:39 | UI Price → 700
+[INFO] 13:50:39 | API Price → 700
+[INFO] 13:50:44 | Reloading Home Page
+[INFO] 13:50:45 | Selecting category: Laptops
+[INFO] 13:50:45 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:50:48 | Reloading Home Page
+[INFO] 13:50:48 | Selecting category: Laptops
+[INFO] 13:50:48 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:50:50 | Reloading Home Page
+[INFO] 13:52:38 | Reloading Home Page
+[INFO] 13:52:39 | Selecting category: Laptops
+[INFO] 13:52:39 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:52:42 | Reloading Home Page
+[INFO] 13:52:42 | Selecting category: Laptops
+[INFO] 13:52:42 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:52:44 | Reloading Home Page
+[INFO] 13:55:02 | Reloading Home Page
+[INFO] 13:55:03 | Selecting category: Laptops
+[INFO] 13:55:03 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:55:06 | Reloading Home Page
+[INFO] 13:55:06 | Selecting category: Laptops
+[INFO] 13:55:06 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 13:55:08 | Reloading Home Page
