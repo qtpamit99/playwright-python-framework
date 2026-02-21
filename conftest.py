@@ -150,10 +150,10 @@ def page(browser, request):
             elif not failed and video_path.exists():
 
                 video_path.unlink()
-                print(f"→ Deleted PASS video: {video_path}")
+                print(f"[INFO] Deleted PASS video: {video_path}")
 
         except Exception as e:
-            print(f"→ Video cleanup error: {str(e)}")
+            print(f"[WARNING] Video cleanup error: {str(e)}")
 
     gc.collect()
 
