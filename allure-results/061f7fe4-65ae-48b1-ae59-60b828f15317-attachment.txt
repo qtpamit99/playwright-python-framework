@@ -1,0 +1,9 @@
+INFO     framework_logger:test_mocking_demo.py:15 👑 MOCKING DEMO TEST STARTED
+INFO     framework_logger:test_mocking_demo.py:24 📡 Mock API response loaded
+INFO     framework_logger:test_mocking_demo.py:36  API interception active
+INFO     framework_logger:home_page.py:14 Selecting category: Laptops
+INFO     framework_logger:home_page.py:26 Products loaded: ['ðŸ”¥ Amit Super Laptop']
+INFO     framework_logger:test_mocking_demo.py:51 UI Product → ðŸ”¥ Amit Super Laptop
+INFO     framework_logger:test_mocking_demo.py:52  UI Price   → $9999
+INFO     framework_logger:test_mocking_demo.py:68  Mock schema validation passed
+INFO     framework_logger:test_mocking_demo.py:76  MOCKING TEST PASSED

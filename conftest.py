@@ -105,7 +105,7 @@ def page(browser, request):
 
         page.screenshot(path=str(screenshot_path))
 
-        print(f"→ Screenshot saved: {screenshot_path}")
+        print(f"[INFO] Screenshot saved: {screenshot_path}")
 
         with open(screenshot_path, "rb") as f:
             allure.attach(
