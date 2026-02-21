@@ -15,6 +15,7 @@ import allure
 from utils.debug_helper import DebugHelper
 from utils.failure_analyzer import FailureAnalyzer
 from api_clients.product_api import ProductAPI
+import requests
 
 
 
@@ -68,6 +69,22 @@ def page(browser, request):
     if not base_url:
         raise ValueError(f"base_url missing for env: {env_name}")
 
+    # ================= CART CLEANUP (🔥 STABILITY BOOSTER 🔥) =================
+    try:
+        payload = {"cookie": "amit054"}
+
+        response = requests.post(
+            "https://api.demoblaze.com/deletecart",
+            json=payload,
+            timeout=10
+        )
+
+        print(f"[INFO] Cart cleanup status: {response.status_code}")
+
+    except Exception as e:
+        print(f"[WARNING] Cart cleanup failed: {str(e)}")
+
+    # ================= PLAYWRIGHT CONTEXT =================
     context = browser.new_context(
         record_video_dir=str(VIDEO_DIR),
         record_video_size={"width": 1280, "height": 720}
@@ -75,14 +92,12 @@ def page(browser, request):
 
     page = context.new_page()
 
-    # ── Runtime Telemetry ──
     page.__console_logs = []
     page.__network_failures = []
 
     page.on("console", lambda msg: page.__console_logs.append(f"{msg.type}: {msg.text}"))
     page.on("requestfailed", lambda req: page.__network_failures.append(req.url))
 
-    # ── Navigation ──
     try:
         page.goto(base_url, timeout=60000, wait_until="domcontentloaded")
     except PlaywrightTimeoutError:
