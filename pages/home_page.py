@@ -1,3 +1,5 @@
+import time
+
 from pages.base_page import BasePage
 from utils.logger import get_logger
 from utils.price_utils import extract_price
@@ -112,6 +114,10 @@ class HomePage(BasePage):
     def get_product_titles(self):
         """Return list of visible product titles"""
         Wait.for_visible(self.page, ".card-title a")
+        #time.sleep(2)
+        self.page.wait_for_function("""
+            () => document.querySelectorAll('.card-title a').length > 0
+        """)
         return self.page.locator(".card-title a").all_inner_texts()
 
     def get_product_price_by_index(self, index):
