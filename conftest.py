@@ -2,6 +2,7 @@ import shutil
 import pytest
 import time
 import gc
+import os
 from datetime import datetime
 from pathlib import Path
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
@@ -10,16 +11,16 @@ from db.db_client import DBClient
 from pages.cart_page import CartPage
 from pages.home_page import HomePage
 from pages.place_order_page import PlaceOrderPage
-from utils.config_manager import load_environment_config
 import allure
+import requests
+
 from utils.debug_helper import DebugHelper
 from utils.failure_analyzer import FailureAnalyzer
 from api_clients.product_api import ProductAPI
-import requests
+from config.settings import settings
 
 
-
-# ================= ROOT DETECTION (BULLETPROOF) =================
+# ================= ROOT DETECTION =================
 def get_project_root():
     current = Path(__file__).resolve()
 
@@ -42,6 +43,17 @@ VIDEO_DIR = PROJECT_ROOT / "videos"
 FAIL_VIDEO_DIR = VIDEO_DIR / "failures"
 
 
+# ================= CLI OPTION =================
+def pytest_addoption(parser):
+    parser.addoption("--env", action="store", default="dev")
+
+
+# ================= SETTINGS SYNC =================
+def pytest_configure(config):
+    env_name = config.getoption("--env")
+    os.environ["TEST_ENV"] = env_name
+
+
 # ================= PLAYWRIGHT =================
 @pytest.fixture(scope="session")
 def playwright():
@@ -62,19 +74,15 @@ def browser(playwright):
 @pytest.fixture(scope="function")
 def page(browser, request):
 
-    env_name = request.config.getoption("--env")
-    env_config = load_environment_config(env_name)
+    if not settings.BASE_URL:
+        raise ValueError(f"BASE_URL missing for env: {settings.ENV}")
 
-    base_url = env_config.get("base_url")
-    if not base_url:
-        raise ValueError(f"base_url missing for env: {env_name}")
-
-    # ================= CART CLEANUP (🔥 STABILITY BOOSTER 🔥) =================
+    # ================= CART CLEANUP =================
     try:
-        payload = {"cookie": "amit054"}
+        payload = {"cookie": settings.CREDENTIALS["username"]}
 
         response = requests.post(
-            "https://api.demoblaze.com/deletecart",
+            f"{settings.API_URL}/deletecart",
             json=payload,
             timeout=10
         )
@@ -99,39 +107,38 @@ def page(browser, request):
     page.on("requestfailed", lambda req: page.__network_failures.append(req.url))
 
     try:
-        page.goto(base_url, timeout=60000, wait_until="domcontentloaded")
+        page.goto(settings.BASE_URL, timeout=60000, wait_until="domcontentloaded")
+        page.set_default_timeout(10000)
+
     except PlaywrightTimeoutError:
-        page.screenshot(path="error_nav_timeout.png")
+        SCREENSHOT_DIR.mkdir(exist_ok=True)
+        page.screenshot(path=str(SCREENSHOT_DIR / "NAV_TIMEOUT.png"))
         raise
 
     yield page
 
-    # ── Detect failure ──
     failed = hasattr(request.node, "rep_call") and request.node.rep_call.failed
 
     if failed:
 
         DebugHelper.attach_page_state(page)
 
-        # ================= SCREENSHOT =================
         SCREENSHOT_DIR.mkdir(exist_ok=True)
 
         screenshot_path = SCREENSHOT_DIR / f"FAIL_{request.node.name}.png"
 
         page.screenshot(path=str(screenshot_path))
 
-        print(f"[INFO] Screenshot saved: {screenshot_path}")
-
         with open(screenshot_path, "rb") as f:
             allure.attach(
                 f.read(),
-                name="📸 Failure Screenshot",
+                name="Failure Screenshot",
                 attachment_type=allure.attachment_type.PNG
             )
 
     # ⭐ CLOSE CONTEXT FIRST ⭐
     context.close()
-    time.sleep(0.6)
+    time.sleep(0.5)
 
     # ================= VIDEO HANDLING =================
     if page.video:
@@ -144,28 +151,23 @@ def page(browser, request):
 
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-                safe_test_name = request.node.name.replace("[", "_").replace("]", "_").replace("::", "_")
+                safe_name = request.node.name.replace("[", "_").replace("]", "_")
 
-                new_video_path = FAIL_VIDEO_DIR / f"FAIL_{safe_test_name}_{timestamp}.webm"
+                new_video = FAIL_VIDEO_DIR / f"FAIL_{safe_name}_{timestamp}.webm"
 
-                shutil.copy2(video_path, new_video_path)
+                shutil.copy2(video_path, new_video)
 
-                print(f"→ Failure video saved → {new_video_path}")
-
-                with open(new_video_path, "rb") as video_file:
+                with open(new_video, "rb") as f:
                     allure.attach(
-                        video_file.read(),
-                        name="🎥 Failure Video",
+                        f.read(),
+                        name="Failure Video",
                         attachment_type=allure.attachment_type.WEBM
                     )
 
                 video_path.unlink()
-                print("→ Deleted original random video")
 
             elif not failed and video_path.exists():
-
                 video_path.unlink()
-                print(f"[INFO] Deleted PASS video: {video_path}")
 
         except Exception as e:
             print(f"[WARNING] Video cleanup error: {str(e)}")
@@ -175,30 +177,25 @@ def page(browser, request):
 
 # ================= API REQUEST FIXTURE =================
 @pytest.fixture(scope="function")
-def api_request(playwright, request):
+def api_request(playwright):
 
-    env_name = request.config.getoption("--env")
-    env_config = load_environment_config(env_name)
+    if not settings.API_URL:
+        raise ValueError(f"API_URL missing for env: {settings.ENV}")
 
-    api_url = env_config.get("api_url")
-    if not api_url:
-        raise ValueError(f"api_url missing for env: {env_name}")
-
-    ctx = playwright.request.new_context(base_url=api_url)
+    ctx = playwright.request.new_context(base_url=settings.API_URL)
     yield ctx
     ctx.dispose()
 
 
 # ================= PRODUCT API FIXTURE =================
 @pytest.fixture(scope="function")
-def product_api(api_request, request):
-
-    env_name = request.config.getoption("--env")
-    env_config = load_environment_config(env_name)
+def product_api(api_request):
 
     return ProductAPI(
         request_context=api_request,
-        env_config=env_config
+        env_config={
+            "api_url": settings.API_URL
+        }
     )
 
 
@@ -220,11 +217,6 @@ def pages(page):
     }
 
 
-# ================= CLI OPTION =================
-def pytest_addoption(parser):
-    parser.addoption("--env", action="store", default="dev")
-
-
 # ================= REPORT HOOK =================
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
@@ -242,6 +234,6 @@ def pytest_runtest_makereport(item, call):
 
         allure.attach(
             failure_type,
-            name=" Failure Classification",
+            name="Failure Classification",
             attachment_type=allure.attachment_type.TEXT
         )

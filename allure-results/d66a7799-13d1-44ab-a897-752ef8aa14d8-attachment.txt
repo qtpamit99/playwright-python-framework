@@ -1,0 +1,3 @@
+[32mINFO    [0m framework_logger:test_home_page.py:20  CONTRACT TEST → Dell i7 8gb
+[32mINFO    [0m framework_logger:home_page.py:14 Selecting category: Laptops
+[32mINFO    [0m framework_logger:home_page.py:26 Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']

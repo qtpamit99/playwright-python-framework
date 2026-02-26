@@ -5,12 +5,10 @@ dev:
   credentials:
     username: "amit054"
     password: "Password.20"
-
-
 qa:
   base_url: "https://qa.demoblaze.com/"
   api_url: "https://api.qa.demoblaze.com"
 
   credentials:
-    username: "qa_user"
-    password: "qa_password"
+    username: "amit054"
+    password: "Password.20"
