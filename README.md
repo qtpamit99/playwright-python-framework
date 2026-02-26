@@ -1,60 +1,60 @@
-# Playwright E2E Framework (Python + Pytest)
+# Playwright E2E Automation Framework
 
 A scalable, maintainable, and contract-driven automation framework built using:
 
-- Playwright  
-- Pytest  
-- Python  
-- UI + API + DB Validation  
-- Allure Reporting  
-- Failure Intelligence  
+- Playwright
+- Pytest
+- Python
+- UI + API + Database Validation
+- Allure Reporting
+- Failure Intelligence
 
 ---
 
-# Framework Highlights
+## Framework Highlights
 
-- UI Automation (Playwright)  
-- API Contract Validation  
-- Database Validation (MySQL)  
-- Schema Validation  
-- Data-Driven Testing  
-- Mocking / API Interception  
-- Screenshot & Video Capture  
-- Allure Reporting  
-- Smart Failure Analysis  
+- UI Automation using Playwright
+- API Contract Validation
+- Database Validation (MySQL)
+- Schema Validation
+- Data-Driven Testing
+- API Mocking / Interception
+- Screenshot & Video Capture
+- Allure Reporting
+- Smart Failure Analysis
 
 ---
 
-# Framework Architecture
+## Framework Architecture
 
 playwright-e2e-framework/
 
-- config/              → Environment configuration  
-- pages/               → Page Object Model (POM)  
-- api_clients/         → API abstraction layer  
-- db/                  → Database layer  
-- utils/               → Reusable utilities  
-- schemas/             → API schema definitions  
-- test_data/           → YAML / JSON test data  
-- tests/               → Test cases  
-- screenshots/         → Failure screenshots  
-- videos/              → Failure videos  
-- allure-results/      → Raw Allure results  
+- config/              Environment configuration
+- pages/               Page Object Model (POM)
+- api_clients/         API abstraction layer
+- db/                  Database layer
+- utils/               Reusable utilities
+- schemas/             API schema definitions
+- test_data/           YAML / JSON test data
+- tests/               Test cases
+- screenshots/         Failure screenshots
+- videos/              Failure videos
+- allure-results/      Raw Allure results
 
 ---
 
-# Installation & Setup
+## Installation & Setup
 
-## Clone Project
+### Clone Project
 
 ```bash
-git clone <repo-url>
+git clone <repository-url>
 cd playwright-e2e-framework
 ```
 
 ---
 
-## Create Virtual Environment
+### Create Virtual Environment
 
 ```bash
 python -m venv .venv
@@ -63,7 +63,7 @@ python -m venv .venv
 
 ---
 
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -71,7 +71,7 @@ pip install -r requirements.txt
 
 ---
 
-## Install Playwright Browsers
+### Install Playwright Browsers
 
 ```bash
 playwright install
@@ -79,17 +79,17 @@ playwright install
 
 ---
 
-# Allure Reporting Setup
+## Allure Reporting Setup
 
-## Install Allure CLI
+### Install Allure CLI (Windows)
 
-Using Scoop (Recommended for Windows):
+Using Scoop (recommended):
 
 ```bash
 scoop install allure
 ```
 
-Verify:
+Verify installation:
 
 ```bash
 allure --version
@@ -97,9 +97,9 @@ allure --version
 
 ---
 
-# Test Execution
+## Test Execution
 
-## Run All Tests
+### Run All Tests
 
 ```bash
 pytest
@@ -107,7 +107,7 @@ pytest
 
 ---
 
-## Run Environment-Specific Tests
+### Run Environment-Specific Tests
 
 ```bash
 pytest --env=dev
@@ -116,33 +116,27 @@ pytest --env=qa
 
 ---
 
-## Run By Marker
+### Run Tests by Marker
 
-### Smoke Tests
+**Smoke Tests**
 
 ```bash
 pytest -m smoke
 ```
 
----
-
-### Regression Tests
+**Regression Tests**
 
 ```bash
 pytest -m regression
 ```
 
----
-
-### Contract Tests
+**Contract Tests**
 
 ```bash
 pytest -m contract
 ```
 
----
-
-### API Tests
+**API Tests**
 
 ```bash
 pytest -m api
@@ -159,19 +153,19 @@ pytest -m "regression and not api"
 
 ---
 
-# Allure Report Generation
+## Allure Report Generation
 
-## Serve Report
+### Serve Report
 
 ```bash
 allure serve allure-results
 ```
 
-This command generates the report and opens it in the browser.
+Generates and opens the report automatically.
 
 ---
 
-## Generate Static Report
+### Generate Static Report
 
 ```bash
 allure generate allure-results -o allure-report --clean
@@ -182,33 +176,33 @@ Useful for CI/CD pipelines.
 
 ---
 
-# Artifacts & Debugging
+## Artifacts & Debugging
 
 The framework automatically captures:
 
-- Screenshot on failure  
-- Video on failure  
+- Screenshot on failure
+- Video on failure
 
 Artifacts are stored in:
 
-- /screenshots  
-- /videos/failures  
+- /screenshots
+- /videos/failures
 
-Artifacts are also attached inside Allure reports.
+Artifacts are also attached to Allure reports.
 
 ---
 
-# Failure Intelligence Features
+## Failure Intelligence Features
 
-- Failure Classification  
-- Page State Capture  
-- Logs & Debug Information  
+- Failure Classification
+- Page State Capture
+- Logs & Debug Information
 
 These features assist in faster root cause analysis.
 
 ---
 
-# Environment Configuration
+## Environment Configuration
 
 Environment data is managed via:
 
@@ -234,31 +228,29 @@ pytest --env=dev
 
 ---
 
-# Test Design Philosophy
+## Test Design Philosophy
 
-- Clean Test Files  
-- Reusable Utilities  
-- Strict Contract Validation  
-- No Duplicate Logic  
-- POM-Centric UI Tests  
-
----
-
-# Best Practices Followed
-
-- Page Object Model (POM)  
-- Separation of Concerns  
-- Contract Testing  
-- Data-Driven Testing  
-- Failure Diagnostics  
+- Clean Test Files
+- Reusable Utilities
+- Strict Contract Validation
+- No Duplicate Logic
+- POM-Centric UI Tests
 
 ---
 
-# Troubleshooting
+## Best Practices Followed
 
-## Allure Command Not Found
+- Page Object Model (POM)
+- Separation of Concerns
+- Contract Testing
+- Data-Driven Testing
+- Failure Diagnostics
 
-Verify installation:
+---
+
+## Troubleshooting
+
+### Allure Command Not Found
 
 ```bash
 allure --version
@@ -266,9 +258,7 @@ allure --version
 
 ---
 
-## Playwright Browser Issues
-
-Reinstall browsers:
+### Playwright Browser Issues
 
 ```bash
 playwright install
@@ -276,9 +266,9 @@ playwright install
 
 ---
 
-## Tests Not Running With Marker
+### Marker-Based Execution Issues
 
-Ensure the test is tagged:
+Ensure tests are tagged correctly:
 
 ```python
 @pytest.mark.smoke
@@ -286,9 +276,9 @@ Ensure the test is tagged:
 
 ---
 
-# Framework Goals
+## Framework Goals
 
-- Stability  
-- Scalability  
-- Maintainability  
-- Enterprise-Ready Design  
+- Stability
+- Scalability
+- Maintainability
+- Enterprise-Ready Design
