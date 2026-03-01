@@ -25,12 +25,10 @@ def get_project_root():
     current = Path(__file__).resolve()
 
     while current != current.parent:
-
         if (current / "requirements.txt").exists() \
            or (current / "pyproject.toml").exists() \
            or (current / ".git").exists():
             return current
-
         current = current.parent
 
     raise RuntimeError("Project root not found")
@@ -43,12 +41,13 @@ VIDEO_DIR = PROJECT_ROOT / "videos"
 FAIL_VIDEO_DIR = VIDEO_DIR / "failures"
 
 
-# ================= CLI OPTION =================
+# ================= CLI OPTIONS =================
 def pytest_addoption(parser):
     parser.addoption("--env", action="store", default="dev")
+    parser.addoption("--ui-device", action="store", default="desktop")
 
 
-# ================= SETTINGS SYNC =================
+# ================= ENV SYNC =================
 def pytest_configure(config):
     env_name = config.getoption("--env")
     os.environ["TEST_ENV"] = env_name
@@ -72,7 +71,7 @@ def browser(playwright):
 
 # ================= PAGE FIXTURE =================
 @pytest.fixture(scope="function")
-def page(browser, request):
+def page(browser, request, playwright):
 
     if not settings.BASE_URL:
         raise ValueError(f"BASE_URL missing for env: {settings.ENV}")
@@ -80,23 +79,44 @@ def page(browser, request):
     # ================= CART CLEANUP =================
     try:
         payload = {"cookie": settings.CREDENTIALS["username"]}
-
-        response = requests.post(
+        requests.post(
             f"{settings.API_URL}/deletecart",
             json=payload,
             timeout=10
         )
-
-        print(f"[INFO] Cart cleanup status: {response.status_code}")
-
     except Exception as e:
         print(f"[WARNING] Cart cleanup failed: {str(e)}")
 
-    # ================= PLAYWRIGHT CONTEXT =================
-    context = browser.new_context(
-        record_video_dir=str(VIDEO_DIR),
-        record_video_size={"width": 1280, "height": 720}
-    )
+    # ================= DEVICE HANDLING =================
+    device_name = request.config.getoption("--ui-device")
+
+    if device_name.lower() == "desktop":
+
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 720},
+            record_video_dir=str(VIDEO_DIR),
+            record_video_size={"width": 1280, "height": 720}
+        )
+
+        print("[INFO] Running in DESKTOP mode")
+
+    else:
+        try:
+            device_config = playwright.devices[device_name]
+
+            context = browser.new_context(
+                **device_config,
+                record_video_dir=str(VIDEO_DIR)
+            )
+
+            print(f"[INFO] Running on device: {device_name}")
+
+        except KeyError:
+            available = list(playwright.devices.keys())[:15]
+            raise ValueError(
+                f"Device '{device_name}' not found.\n"
+                f"Example available devices: {available}"
+            )
 
     page = context.new_page()
 
@@ -109,7 +129,6 @@ def page(browser, request):
     try:
         page.goto(settings.BASE_URL, timeout=60000, wait_until="domcontentloaded")
         page.set_default_timeout(10000)
-
     except PlaywrightTimeoutError:
         SCREENSHOT_DIR.mkdir(exist_ok=True)
         page.screenshot(path=str(SCREENSHOT_DIR / "NAV_TIMEOUT.png"))
@@ -117,14 +136,13 @@ def page(browser, request):
 
     yield page
 
+    # ================= FAILURE CHECK =================
     failed = hasattr(request.node, "rep_call") and request.node.rep_call.failed
 
     if failed:
-
         DebugHelper.attach_page_state(page)
 
         SCREENSHOT_DIR.mkdir(exist_ok=True)
-
         screenshot_path = SCREENSHOT_DIR / f"FAIL_{request.node.name}.png"
 
         page.screenshot(path=str(screenshot_path))
@@ -136,7 +154,7 @@ def page(browser, request):
                 attachment_type=allure.attachment_type.PNG
             )
 
-    # ⭐ CLOSE CONTEXT FIRST ⭐
+    # Close context first
     context.close()
     time.sleep(0.5)
 
@@ -150,7 +168,6 @@ def page(browser, request):
                 FAIL_VIDEO_DIR.mkdir(parents=True, exist_ok=True)
 
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
                 safe_name = request.node.name.replace("[", "_").replace("]", "_")
 
                 new_video = FAIL_VIDEO_DIR / f"FAIL_{safe_name}_{timestamp}.webm"
@@ -190,12 +207,9 @@ def api_request(playwright):
 # ================= PRODUCT API FIXTURE =================
 @pytest.fixture(scope="function")
 def product_api(api_request):
-
     return ProductAPI(
         request_context=api_request,
-        env_config={
-            "api_url": settings.API_URL
-        }
+        env_config={"api_url": settings.API_URL}
     )
 
 
@@ -207,7 +221,7 @@ def db_client():
     client.close()
 
 
-# ================= POM PAGES FIXTURE =================
+# ================= POM FIXTURE =================
 @pytest.fixture
 def pages(page):
     return {

@@ -1,27 +1,34 @@
 # Playwright E2E Automation Framework
 
-A scalable, maintainable, and contract-driven automation framework built using:
+A scalable, environment-driven, and enterprise-ready automation framework built using:
 
 - Playwright
 - Pytest
 - Python
 - UI + API + Database Validation
 - Allure Reporting
+- Parallel Execution
+- Mobile Device Emulation
 - Failure Intelligence
 
 ---
 
-## Framework Highlights
+## Key Capabilities
 
-- UI Automation using Playwright
+- UI Automation (Playwright)
 - API Contract Validation
 - Database Validation (MySQL)
 - Schema Validation
-- Data-Driven Testing
+- Data-Driven Testing (YAML / JSON)
 - API Mocking / Interception
-- Screenshot & Video Capture
+- Screenshot on Failure
+- Video Recording (Failure Only)
 - Allure Reporting
-- Smart Failure Analysis
+- Failure Classification & Debug Capture
+- Multi-Environment Execution
+- Dynamic Mobile Device Emulation
+- Parallel Execution (pytest-xdist)
+- CI/CD Ready (Jenkins Compatible)
 
 ---
 
@@ -29,17 +36,17 @@ A scalable, maintainable, and contract-driven automation framework built using:
 
 playwright-e2e-framework/
 
-- config/              Environment configuration
-- pages/               Page Object Model (POM)
-- api_clients/         API abstraction layer
-- db/                  Database layer
-- utils/               Reusable utilities
-- schemas/             API schema definitions
-- test_data/           YAML / JSON test data
-- tests/               Test cases
-- screenshots/         Failure screenshots
-- videos/              Failure videos
-- allure-results/      Raw Allure results
+config/              Environment configuration  
+pages/               Page Object Model (POM)  
+api_clients/         API abstraction layer  
+db/                  Database layer  
+utils/               Reusable utilities  
+schemas/             API schema definitions  
+test_data/           YAML / JSON test data  
+tests/               Test cases  
+screenshots/         Failure screenshots  
+videos/              Failure videos  
+allure-results/      Raw Allure results  
 
 ---
 
@@ -52,8 +59,6 @@ git clone <repository-url>
 cd playwright-e2e-framework
 ```
 
----
-
 ### Create Virtual Environment
 
 ```bash
@@ -61,15 +66,11 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
----
-
 ### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
-
----
 
 ### Install Playwright Browsers
 
@@ -79,91 +80,114 @@ playwright install
 
 ---
 
-## Allure Reporting Setup
+## Environment Configuration
 
-### Install Allure CLI (Windows)
+Environment details are managed via:
 
-Using Scoop (recommended):
+config/environments.yaml
 
-```bash
-scoop install allure
+Example:
+
+```yaml
+dev:
+  base_url: https://www.demoblaze.com/
+  api_url: https://api.demoblaze.com
+
+  credentials:
+    username: user
+    password: pass
 ```
 
-Verify installation:
+Run with specific environment:
 
 ```bash
-allure --version
-```
-
----
-
-## Test Execution
-
-### Run All Tests
-
-```bash
-pytest
-```
-
----
-
-### Run Environment-Specific Tests
-
-```bash
-pytest --env=dev
 pytest --env=qa
 ```
 
 ---
 
-### Run Tests by Marker
+## Device Execution (Desktop + Mobile)
 
-**Smoke Tests**
+The framework supports real mobile emulation using Playwright device profiles.
+
+### Desktop (Default)
+
+```bash
+pytest
+```
+
+### Run on Specific Device
+
+```bash
+pytest --ui-device="iPhone 13"
+pytest --ui-device="Pixel 7"
+pytest --ui-device="Galaxy S22"
+```
+
+### Combined Example
+
+```bash
+pytest -m regression --env=qa --ui-device="iPhone 13"
+```
+
+---
+
+## Marker-Based Execution
+
+### Smoke
 
 ```bash
 pytest -m smoke
 ```
 
-**Regression Tests**
+### Regression
 
 ```bash
 pytest -m regression
 ```
 
-**Contract Tests**
-
-```bash
-pytest -m contract
-```
-
-**API Tests**
+### API Tests
 
 ```bash
 pytest -m api
 ```
 
----
+### Contract Tests
 
-### Combined Execution
+```bash
+pytest -m contract
+```
+
+### Combined
 
 ```bash
 pytest -m "smoke or regression"
-pytest -m "regression and not api"
 ```
 
 ---
 
-## Allure Report Generation
+## Parallel Execution
 
-### Serve Report
+```bash
+pytest -n 2
+pytest -n auto
+```
+
+Example:
+
+```bash
+pytest -m regression --env=qa --ui-device="Pixel 7" -n 2
+```
+
+---
+
+## Allure Reporting
+
+### Generate & Serve
 
 ```bash
 allure serve allure-results
 ```
-
-Generates and opens the report automatically.
-
----
 
 ### Generate Static Report
 
@@ -172,107 +196,48 @@ allure generate allure-results -o allure-report --clean
 allure open allure-report
 ```
 
-Useful for CI/CD pipelines.
+---
+
+## Artifacts
+
+On failure, the framework automatically captures:
+
+- Screenshot
+- Video (failure only)
+- Console logs
+- Network failures
+- Failure classification
+
+Stored in:
+
+/screenshots  
+/videos/failures  
+
+Artifacts are also attached inside Allure reports.
 
 ---
 
-## Artifacts & Debugging
+## CI/CD Ready
 
-The framework automatically captures:
+The framework supports:
 
-- Screenshot on failure
-- Video on failure
-
-Artifacts are stored in:
-
-- /screenshots
-- /videos/failures
-
-Artifacts are also attached to Allure reports.
-
----
-
-## Failure Intelligence Features
-
-- Failure Classification
-- Page State Capture
-- Logs & Debug Information
-
-These features assist in faster root cause analysis.
-
----
-
-## Environment Configuration
-
-Environment data is managed via:
-
-config/environments.yaml
-
-Example:
-
-```yaml
-dev:
-  base_url: https://example.com
-  api_url: https://api.example.com
-
-  credentials:
-    username: testuser
-    password: secret
-```
-
-Run tests using:
-
-```bash
-pytest --env=dev
-```
-
----
-
-## Test Design Philosophy
-
-- Clean Test Files
-- Reusable Utilities
-- Strict Contract Validation
-- No Duplicate Logic
-- POM-Centric UI Tests
+- Jenkins Pipeline
+- Parallel execution
+- Environment parameterization
+- Device parameterization
+- Allure integration
 
 ---
 
 ## Best Practices Followed
 
-- Page Object Model (POM)
+- Page Object Model
 - Separation of Concerns
 - Contract Testing
 - Data-Driven Testing
 - Failure Diagnostics
-
----
-
-## Troubleshooting
-
-### Allure Command Not Found
-
-```bash
-allure --version
-```
-
----
-
-### Playwright Browser Issues
-
-```bash
-playwright install
-```
-
----
-
-### Marker-Based Execution Issues
-
-Ensure tests are tagged correctly:
-
-```python
-@pytest.mark.smoke
-```
+- Clean Test Design
+- CLI-driven execution
 
 ---
 
@@ -281,4 +246,5 @@ Ensure tests are tagged correctly:
 - Stability
 - Scalability
 - Maintainability
-- Enterprise-Ready Design
+- Cross-device coverage
+- Enterprise-ready architecture

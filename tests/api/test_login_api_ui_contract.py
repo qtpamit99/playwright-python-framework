@@ -21,7 +21,7 @@ def test_login_ui_api_contract(page, request):
     # ============================================
     # STEP 1 – UI Login (Reusable)
     # ============================================
-    with allure.step("🖥️ Login via UI"):
+    with allure.step(" Login via UI"):
 
         login_page = SessionManager.login(page, username, password)
 
