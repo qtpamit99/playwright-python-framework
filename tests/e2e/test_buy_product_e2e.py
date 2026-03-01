@@ -137,4 +137,4 @@ def test_full_purchase_flow(pages, page, api_request, db_client, request):
         confirmation_text = order.get_confirmation_details()
 
         Assert.contains("Thank you for your purchase!", confirmation_text)
-        Assert.contains(str(expected_total), confirmation_text)
+        Assert.contains(str("expected_total"), confirmation_text)

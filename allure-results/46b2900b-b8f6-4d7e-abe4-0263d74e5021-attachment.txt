@@ -1,0 +1,6 @@
+[32mINFO    [0m framework_logger:test_ui_api_mapping.py:31  CONTRACT TEST → Sony vaio i5
+[32mINFO    [0m framework_logger:home_page.py:16 Selecting category: Laptops
+[32mINFO    [0m framework_logger:home_page.py:28 Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[32mINFO    [0m framework_logger:test_ui_api_mapping.py:41 UI Title → Sony vaio i5
+[32mINFO    [0m framework_logger:test_ui_api_mapping.py:42 UI Price → 790
+[32mINFO    [0m framework_logger:test_ui_api_mapping.py:70 API Price → 790
