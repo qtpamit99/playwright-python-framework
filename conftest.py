@@ -62,15 +62,22 @@ def playwright():
 
 # ================= BROWSER =================
 @pytest.fixture(scope="session")
-def browser(playwright,request):
-    browser_name = request.config.getoption("--browser")
+def browser(playwright, request):
+
+    browser_name = request.config.getoption("--browser", default="chromium")
 
     if browser_name == "firefox":
         browser = playwright.firefox.launch(headless=HEADLESS)
+
     elif browser_name == "webkit":
         browser = playwright.webkit.launch(headless=HEADLESS)
+
     else:
         browser = playwright.chromium.launch(headless=HEADLESS)
+
+    yield browser
+
+    browser.close()
 
 
 # ================= PAGE FIXTURE =================
