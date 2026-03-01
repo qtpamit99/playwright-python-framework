@@ -45,6 +45,7 @@ FAIL_VIDEO_DIR = VIDEO_DIR / "failures"
 def pytest_addoption(parser):
     parser.addoption("--env", action="store", default="dev")
     parser.addoption("--ui-device", action="store", default="desktop")
+    parser.addoption("--browser", action="store", default="chromium")
 
 
 # ================= ENV SYNC =================
@@ -64,19 +65,16 @@ def playwright():
 @pytest.fixture(scope="session")
 def browser(playwright, request):
 
-    browser_name = request.config.getoption("--browser", default="chromium")
+    browser_name = request.config.getoption("--browser")
 
     if browser_name == "firefox":
         browser = playwright.firefox.launch(headless=HEADLESS)
-
     elif browser_name == "webkit":
         browser = playwright.webkit.launch(headless=HEADLESS)
-
     else:
         browser = playwright.chromium.launch(headless=HEADLESS)
 
     yield browser
-
     browser.close()
 
 
