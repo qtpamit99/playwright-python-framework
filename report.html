@@ -3,11 +3,332 @@
   <head>
     <meta charset="utf-8"/>
     <title id="head-title">report.html</title>
-      <link href="assets\style.css" rel="stylesheet" type="text/css"/>
+      <style type="text/css">body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  /* do not increase min-width as some may use split screens */
+  min-width: 800px;
+  color: #999;
+}
+
+h1 {
+  font-size: 24px;
+  color: black;
+}
+
+h2 {
+  font-size: 16px;
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+a {
+  color: #999;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+#environment td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  vertical-align: top;
+}
+#environment tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+#environment ul {
+  margin: 0;
+  padding: 0 20px;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed,
+.passed .col-result {
+  color: green;
+}
+
+span.skipped,
+span.xfailed,
+span.rerun,
+.skipped .col-result,
+.xfailed .col-result,
+.rerun .col-result {
+  color: orange;
+}
+
+span.error,
+span.failed,
+span.xpassed,
+.error .col-result,
+.failed .col-result,
+.xpassed .col-result {
+  color: red;
+}
+
+.col-links__extra {
+  margin-right: 3px;
+}
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+#results-table {
+  border: 1px solid #e6e6e6;
+  color: #999;
+  font-size: 12px;
+  width: 100%;
+}
+#results-table th,
+#results-table td {
+  padding: 5px;
+  border: 1px solid #e6e6e6;
+  text-align: left;
+}
+#results-table th {
+  font-weight: bold;
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+.logwrapper {
+  max-height: 230px;
+  overflow-y: scroll;
+  background-color: #e6e6e6;
+}
+.logwrapper.expanded {
+  max-height: none;
+}
+.logwrapper.expanded .logexpander:after {
+  content: "collapse [-]";
+}
+.logwrapper .logexpander {
+  z-index: 1;
+  position: sticky;
+  top: 10px;
+  width: max-content;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 5px 7px;
+  margin: 10px 0 10px calc(100% - 80px);
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+.logwrapper .logexpander:after {
+  content: "expand [+]";
+}
+.logwrapper .logexpander:hover {
+  color: #000;
+  border-color: #000;
+}
+.logwrapper .log {
+  min-height: 40px;
+  position: relative;
+  top: -50px;
+  height: calc(100% + 50px);
+  border: 1px solid #e6e6e6;
+  color: black;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  padding: 5px;
+  padding-right: 80px;
+  white-space: pre-wrap;
+}
+
+div.media {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin: 0 5px;
+  overflow: hidden;
+  width: 320px;
+}
+
+.media-container {
+  display: grid;
+  grid-template-columns: 25px auto 25px;
+  align-items: center;
+  flex: 1 1;
+  overflow: hidden;
+  height: 200px;
+}
+
+.media-container--fullscreen {
+  grid-template-columns: 0px auto 0px;
+}
+
+.media-container__nav--right,
+.media-container__nav--left {
+  text-align: center;
+  cursor: pointer;
+}
+
+.media-container__viewport {
+  cursor: pointer;
+  text-align: center;
+  height: inherit;
+}
+.media-container__viewport img,
+.media-container__viewport video {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+}
+
+.media__name,
+.media__counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 0 0 25px;
+  align-items: center;
+}
+
+.collapsible td:not(.col-links) {
+  cursor: pointer;
+}
+.collapsible td:not(.col-links):hover::after {
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.col-result {
+  width: 130px;
+}
+.col-result:hover::after {
+  content: " (hide details)";
+}
+
+.col-result.collapsed:hover::after {
+  content: " (show details)";
+}
+
+#environment-header h2:hover::after {
+  content: " (hide details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#environment-header.collapsed h2:hover::after {
+  content: " (show details)";
+  color: #bbb;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+  cursor: pointer;
+}
+.sortable.desc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: -12.5px;
+  border: 10px solid #4caf50;
+  border-bottom: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.sortable.asc:after {
+  content: " ";
+  position: relative;
+  left: 5px;
+  bottom: 12.5px;
+  border: 10px solid #4caf50;
+  border-top: 0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+.hidden, .summary__reload__button.hidden {
+  display: none;
+}
+
+.summary__data {
+  flex: 0 0 550px;
+}
+.summary__reload {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+}
+.summary__reload__button {
+  flex: 0 0 300px;
+  display: flex;
+  color: white;
+  font-weight: bold;
+  background-color: #4caf50;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.summary__reload__button:hover {
+  background-color: #46a049;
+}
+.summary__spacer {
+  flex: 0 0 550px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters,
+.collapse {
+  display: flex;
+  align-items: center;
+}
+.filters button,
+.collapse button {
+  color: #999;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.filters button:hover,
+.collapse button:hover {
+  color: #ccc;
+}
+
+.filter__label {
+  margin-right: 10px;
+}
+
+      </style>
+    
   </head>
   <body>
     <h1 id="title">report.html</h1>
-    <p>Report generated on 12-Feb-2026 at 15:25:57 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a>
+    <p>Report generated on 03-Mar-2026 at 08:17:42 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a>
         v4.2.0</p>
     <div id="environment-header">
       <h2>Environment</h2>
@@ -62,7 +383,7 @@
         <h2>Summary</h2>
         <div class="additional-summary prefix">
         </div>
-        <p class="run-count">3 tests took 00:02:56.</p>
+        <p class="run-count">7 tests took 00:00:59.</p>
         <p class="filter">(Un)check the boxes to filter the results.</p>
         <div class="summary__reload">
           <div class="summary__reload__button hidden" onclick="location.reload()">
@@ -75,7 +396,7 @@
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="failed" >
             <span class="failed">1 Failed,</span>
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="passed" >
-            <span class="passed">2 Passed,</span>
+            <span class="passed">6 Passed,</span>
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="skipped" disabled>
             <span class="skipped">0 Skipped,</span>
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="xfailed" disabled>
@@ -84,8 +405,8 @@
             <span class="xpassed">0 Unexpected passes,</span>
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="error" disabled>
             <span class="error">0 Errors,</span>
-            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="rerun" >
-            <span class="rerun">1 Reruns</span>
+            <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="rerun" disabled>
+            <span class="rerun">0 Reruns</span>
             <input checked="true" class="filter" name="filter_checkbox" type="checkbox" data-test-result="retried" disabled>
             <span class="retried">0 Retried,</span>
           </div>
@@ -110,7 +431,7 @@
       </thead>
     </table>
   <footer>
-    <div id="data-container" data-jsonblob="{&#34;environment&#34;: {&#34;Python&#34;: &#34;3.13.0&#34;, &#34;Platform&#34;: &#34;Windows-11-10.0.26200-SP0&#34;, &#34;Packages&#34;: {&#34;pytest&#34;: &#34;9.0.2&#34;, &#34;pluggy&#34;: &#34;1.6.0&#34;}, &#34;Plugins&#34;: {&#34;base-url&#34;: &#34;2.1.0&#34;, &#34;html&#34;: &#34;4.2.0&#34;, &#34;metadata&#34;: &#34;3.1.1&#34;, &#34;playwright&#34;: &#34;0.7.2&#34;, &#34;rerunfailures&#34;: &#34;16.1&#34;, &#34;xdist&#34;: &#34;3.8.0&#34;}, &#34;JAVA_HOME&#34;: &#34;C:\\Program Files\\Java\\jdk-21&#34;, &#34;Base URL&#34;: &#34;&#34;}, &#34;tests&#34;: {&#34;tests/test_cart_flow.py::test_laptop_data_driven_contract&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/test_cart_flow.py::test_laptop_data_driven_contract&#34;, &#34;duration&#34;: &#34;00:00:05&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/test_cart_flow.py::test_laptop_data_driven_contract&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:05&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;[gw0] win32 -- Python 3.13.0 C:\\Users\\Amitu\\PycharmProjects\\playwright-e2e-framework\\.venv\\Scripts\\python.exe\n\n------------------------------ Captured log call -------------------------------\nINFO     framework_logger:home_page.py:15 Selecting category: Laptops\nINFO     framework_logger:home_page.py:24 Products loaded: [&amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;, &amp;#x27;MacBook air&amp;#x27;, &amp;#x27;Dell i7 8gb&amp;#x27;, &amp;#x27;2017 Dell 15.6 Inch&amp;#x27;, &amp;#x27;MacBook Pro&amp;#x27;]\n\n&#34;}], &#34;tests/test_home_page.py::test_add_laptop_to_cart&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Rerun&#34;, &#34;testId&#34;: &#34;tests/test_home_page.py::test_add_laptop_to_cart&#34;, &#34;duration&#34;: &#34;00:00:04&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Rerun&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/test_home_page.py::test_add_laptop_to_cart&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:04&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;[gw0] win32 -- Python 3.13.0 C:\\Users\\Amitu\\PycharmProjects\\playwright-e2e-framework\\.venv\\Scripts\\python.exe\n\npage = &amp;lt;Page url=&amp;#x27;https://www.demoblaze.com/#&amp;#x27;&amp;gt;\n\n    def test_add_laptop_to_cart(page):\n    \n        home = HomePage(page)\n        cart = CartPage(page)\n    \n        # \u2705 Step 1 \u2013 Select category\n&amp;gt;       home.select_category(&amp;quot;Laptops&amp;quot;)\n\ntests\\test_home_page.py:12: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\npages\\home_page.py:20: in select_category\n    self.page.locator(&amp;quot;.card&amp;quot;).first.wait_for()\n.venv\\Lib\\site-packages\\playwright\\sync_api\\_generated.py:18074: in wait_for\n    self._sync(self._impl_obj.wait_for(timeout=timeout, state=state))\n.venv\\Lib\\site-packages\\playwright\\_impl\\_locator.py:710: in wait_for\n    await self._frame.wait_for_selector(\n.venv\\Lib\\site-packages\\playwright\\_impl\\_frame.py:369: in wait_for_selector\n    await self._channel.send(\n.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py:69: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = &amp;lt;playwright._impl._connection.Connection object at 0x0000022F1E895BE0&amp;gt;, cb = &amp;lt;function Channel.send.&amp;lt;locals&amp;gt;.&amp;lt;lambda&amp;gt; at 0x0000022F1EC39940&amp;gt;, is_internal = False\ntitle = None\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None\n    ) -&amp;gt; Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(\n            task, &amp;quot;__pw_stack__&amp;quot;, None\n        ) or inspect.stack(0)\n    \n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n&amp;gt;           raise rewrite_error(error, f&amp;quot;{parsed_st[&amp;#x27;apiName&amp;#x27;]}: {error}&amp;quot;) from None\nE           playwright._impl._errors.TargetClosedError: Locator.wait_for: Target page, context or browser has been closed\n\n.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py:559: TargetClosedError\n&#34;}, {&#34;extras&#34;: [], &#34;result&#34;: &#34;Failed&#34;, &#34;testId&#34;: &#34;tests/test_home_page.py::test_add_laptop_to_cart&#34;, &#34;duration&#34;: &#34;00:00:04&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Failed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/test_home_page.py::test_add_laptop_to_cart&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:04&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;[gw0] win32 -- Python 3.13.0 C:\\Users\\Amitu\\PycharmProjects\\playwright-e2e-framework\\.venv\\Scripts\\python.exe\n\npage = &amp;lt;Page url=&amp;#x27;https://www.demoblaze.com/#&amp;#x27;&amp;gt;\n\n    def test_add_laptop_to_cart(page):\n    \n        home = HomePage(page)\n        cart = CartPage(page)\n    \n        # \u2705 Step 1 \u2013 Select category\n&amp;gt;       home.select_category(&amp;quot;Laptops&amp;quot;)\n\ntests\\test_home_page.py:12: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\npages\\home_page.py:20: in select_category\n    self.page.locator(&amp;quot;.card&amp;quot;).first.wait_for()\n.venv\\Lib\\site-packages\\playwright\\sync_api\\_generated.py:18074: in wait_for\n    self._sync(self._impl_obj.wait_for(timeout=timeout, state=state))\n.venv\\Lib\\site-packages\\playwright\\_impl\\_locator.py:710: in wait_for\n    await self._frame.wait_for_selector(\n.venv\\Lib\\site-packages\\playwright\\_impl\\_frame.py:369: in wait_for_selector\n    await self._channel.send(\n.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py:69: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = &amp;lt;playwright._impl._connection.Connection object at 0x0000022F1E895BE0&amp;gt;, cb = &amp;lt;function Channel.send.&amp;lt;locals&amp;gt;.&amp;lt;lambda&amp;gt; at 0x0000022F1ED37920&amp;gt;, is_internal = False\ntitle = None\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None\n    ) -&amp;gt; Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(\n            task, &amp;quot;__pw_stack__&amp;quot;, None\n        ) or inspect.stack(0)\n    \n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n&amp;gt;           raise rewrite_error(error, f&amp;quot;{parsed_st[&amp;#x27;apiName&amp;#x27;]}: {error}&amp;quot;) from None\nE           playwright._impl._errors.TargetClosedError: Locator.wait_for: Target page, context or browser has been closed\n\n.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py:559: TargetClosedError\n\n------------------------------ Captured log call -------------------------------\nINFO     framework_logger:home_page.py:15 Selecting category: Laptops\n\n\n------------------------------ Captured log call -------------------------------\nINFO     framework_logger:home_page.py:15 Selecting category: Laptops\n\n&#34;}], &#34;tests/test_smoke.py::test_page_load&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/test_smoke.py::test_page_load&#34;, &#34;duration&#34;: &#34;00:00:02&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/test_smoke.py::test_page_load&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:02&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;[gw0] win32 -- Python 3.13.0 C:\\Users\\Amitu\\PycharmProjects\\playwright-e2e-framework\\.venv\\Scripts\\python.exe\n&#34;}]}, &#34;renderCollapsed&#34;: [&#34;passed&#34;], &#34;initialSort&#34;: &#34;result&#34;, &#34;title&#34;: &#34;report.html&#34;}"></div>
+    <div id="data-container" data-jsonblob="{&#34;environment&#34;: {&#34;Python&#34;: &#34;3.13.0&#34;, &#34;Platform&#34;: &#34;Windows-11-10.0.26200-SP0&#34;, &#34;Packages&#34;: {&#34;pytest&#34;: &#34;9.0.2&#34;, &#34;pluggy&#34;: &#34;1.6.0&#34;}, &#34;Plugins&#34;: {&#34;allure-pytest&#34;: &#34;2.15.3&#34;, &#34;base-url&#34;: &#34;2.1.0&#34;, &#34;html&#34;: &#34;4.2.0&#34;, &#34;metadata&#34;: &#34;3.1.1&#34;, &#34;rerunfailures&#34;: &#34;16.1&#34;, &#34;xdist&#34;: &#34;3.8.0&#34;}, &#34;JAVA_HOME&#34;: &#34;C:\\Program Files\\Java\\jdk-21&#34;, &#34;Base URL&#34;: &#34;&#34;}, &#34;tests&#34;: {&#34;tests/api/test_login_api_ui_contract.py::test_login_ui_api_contract&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/api/test_login_api_ui_contract.py::test_login_ui_api_contract&#34;, &#34;duration&#34;: &#34;00:00:21&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/api/test_login_api_ui_contract.py::test_login_ui_api_contract&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:21&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;No log output captured.&#34;}], &#34;tests/api/test_product_schema.py::test_product_schema_validation&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/api/test_product_schema.py::test_product_schema_validation&#34;, &#34;duration&#34;: &#34;644 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/api/test_product_schema.py::test_product_schema_validation&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;644 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nINFO     framework_logger:test_product_schema.py:15 API SCHEMA VALIDATION STARTED\nINFO     framework_logger:test_product_schema.py:23 Products Received \u2192 7\nINFO     framework_logger:test_product_schema.py:33  API SCHEMA VALIDATION PASSED\n\n&#34;}], &#34;tests/api/test_products_api.py::test_product_schema_validation&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/api/test_products_api.py::test_product_schema_validation&#34;, &#34;duration&#34;: &#34;520 ms&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/api/test_products_api.py::test_product_schema_validation&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;520 ms&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nINFO     framework_logger:test_products_api.py:17 PRODUCT API SCHEMA TEST STARTED\nINFO     framework_logger:test_products_api.py:29  Products Received \u2192 7\nINFO     framework_logger:test_products_api.py:40 PRODUCT API SCHEMA TEST PASSED\n\n&#34;}], &#34;tests/contract/test_ui_api_mapping.py::test_ui_api_product_mapping[data0]&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/contract/test_ui_api_mapping.py::test_ui_api_product_mapping[data0]&#34;, &#34;duration&#34;: &#34;00:00:07&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/contract/test_ui_api_mapping.py::test_ui_api_product_mapping[data0]&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:07&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nINFO     framework_logger:test_ui_api_mapping.py:31  CONTRACT TEST \u2192 Sony vaio i5\nINFO     framework_logger:home_page.py:16 Selecting category: Laptops\nINFO     framework_logger:home_page.py:28 Products loaded: [&amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;, &amp;#x27;MacBook air&amp;#x27;, &amp;#x27;Dell i7 8gb&amp;#x27;, &amp;#x27;2017 Dell 15.6 Inch&amp;#x27;, &amp;#x27;MacBook Pro&amp;#x27;]\nINFO     framework_logger:test_ui_api_mapping.py:41 UI Title \u2192 Sony vaio i5\nINFO     framework_logger:test_ui_api_mapping.py:42 UI Price \u2192 790\nINFO     framework_logger:test_ui_api_mapping.py:70 API Price \u2192 790\n\n&#34;}], &#34;tests/contract/test_ui_api_mapping.py::test_ui_api_product_mapping[data1]&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/contract/test_ui_api_mapping.py::test_ui_api_product_mapping[data1]&#34;, &#34;duration&#34;: &#34;00:00:06&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/contract/test_ui_api_mapping.py::test_ui_api_product_mapping[data1]&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:06&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nINFO     framework_logger:test_ui_api_mapping.py:31  CONTRACT TEST \u2192 Dell i7 8gb\nINFO     framework_logger:home_page.py:16 Selecting category: Laptops\nINFO     framework_logger:home_page.py:28 Products loaded: [&amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;, &amp;#x27;MacBook air&amp;#x27;, &amp;#x27;Dell i7 8gb&amp;#x27;, &amp;#x27;2017 Dell 15.6 Inch&amp;#x27;, &amp;#x27;MacBook Pro&amp;#x27;]\nINFO     framework_logger:test_ui_api_mapping.py:41 UI Title \u2192 Dell i7 8gb\nINFO     framework_logger:test_ui_api_mapping.py:42 UI Price \u2192 700\nINFO     framework_logger:test_ui_api_mapping.py:70 API Price \u2192 700\n\n&#34;}], &#34;tests/e2e/test_buy_product_e2e.py::test_full_purchase_flow&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Passed&#34;, &#34;testId&#34;: &#34;tests/e2e/test_buy_product_e2e.py::test_full_purchase_flow&#34;, &#34;duration&#34;: &#34;00:00:17&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Passed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/e2e/test_buy_product_e2e.py::test_full_purchase_flow&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:17&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;------------------------------ Captured log call -------------------------------\nINFO     framework_logger:home_page.py:132 Reloading Home Page\nINFO     framework_logger:home_page.py:16 Selecting category: Laptops\nINFO     framework_logger:home_page.py:28 Products loaded: [&amp;#x27;Samsung galaxy s6&amp;#x27;, &amp;#x27;Nokia lumia 1520&amp;#x27;, &amp;#x27;Nexus 6&amp;#x27;, &amp;#x27;Samsung galaxy s7&amp;#x27;, &amp;#x27;Iphone 6 32gb&amp;#x27;, &amp;#x27;Sony xperia z5&amp;#x27;, &amp;#x27;HTC One M9&amp;#x27;, &amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;]\nINFO     framework_logger:home_page.py:132 Reloading Home Page\nINFO     framework_logger:home_page.py:16 Selecting category: Laptops\nINFO     framework_logger:home_page.py:28 Products loaded: [&amp;#x27;Samsung galaxy s6&amp;#x27;, &amp;#x27;Nokia lumia 1520&amp;#x27;, &amp;#x27;Nexus 6&amp;#x27;, &amp;#x27;Samsung galaxy s7&amp;#x27;, &amp;#x27;Iphone 6 32gb&amp;#x27;, &amp;#x27;Sony xperia z5&amp;#x27;, &amp;#x27;HTC One M9&amp;#x27;, &amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;]\nINFO     framework_logger:home_page.py:132 Reloading Home Page\n\n&#34;}], &#34;tests/test_cart_flow.py::test_laptop_data_driven_contract&#34;: [{&#34;extras&#34;: [], &#34;result&#34;: &#34;Failed&#34;, &#34;testId&#34;: &#34;tests/test_cart_flow.py::test_laptop_data_driven_contract&#34;, &#34;duration&#34;: &#34;00:00:05&#34;, &#34;resultsTableRow&#34;: [&#34;&lt;td class=\&#34;col-result\&#34;&gt;Failed&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-testId\&#34;&gt;tests/test_cart_flow.py::test_laptop_data_driven_contract&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-duration\&#34;&gt;00:00:05&lt;/td&gt;&#34;, &#34;&lt;td class=\&#34;col-links\&#34;&gt;&lt;/td&gt;&#34;], &#34;log&#34;: &#34;tests\\test_cart_flow.py:107: in test_laptop_data_driven_contract\n    Assert.equals(&amp;quot;ui_price&amp;quot;, api_price)\nutils\\assertions.py:5: in equals\n    assert actual == expected, \\\n           ^^^^^^^^^^^^^^^^^^\nE   AssertionError:  ASSERT EQUALS FAILED\nE   Expected: 790\nE   Actual: ui_price\n\n------------------------------ Captured log call -------------------------------\nINFO     framework_logger:test_cart_flow.py:18  DATA DRIVEN CONTRACT TEST STARTED\nINFO     framework_logger:test_cart_flow.py:33 Category \u2192 Laptops\nINFO     framework_logger:test_cart_flow.py:34 Expected Products \u2192 [&amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Dell i7 8gb&amp;#x27;]\nINFO     framework_logger:home_page.py:16 Selecting category: Laptops\nINFO     framework_logger:home_page.py:28 Products loaded: [&amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;, &amp;#x27;MacBook air&amp;#x27;, &amp;#x27;Dell i7 8gb&amp;#x27;, &amp;#x27;2017 Dell 15.6 Inch&amp;#x27;, &amp;#x27;MacBook Pro&amp;#x27;]\nINFO     framework_logger:test_cart_flow.py:44  UI Products \u2192 [&amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;, &amp;#x27;MacBook air&amp;#x27;, &amp;#x27;Dell i7 8gb&amp;#x27;, &amp;#x27;2017 Dell 15.6 Inch&amp;#x27;, &amp;#x27;MacBook Pro&amp;#x27;]\nINFO     framework_logger:test_cart_flow.py:61  API Products \u2192 [&amp;#x27;Sony vaio i5&amp;#x27;, &amp;#x27;Sony vaio i7&amp;#x27;, &amp;#x27;MacBook air&amp;#x27;, &amp;#x27;Dell i7 8gb&amp;#x27;, &amp;#x27;2017 Dell 15.6 Inch&amp;#x27;, &amp;#x27;MacBook Pro&amp;#x27;]\nINFO     framework_logger:test_cart_flow.py:74  Matching Product \u2192 Sony vaio i5\nINFO     framework_logger:test_cart_flow.py:91  DB Product \u2192 Sony vaio i5\nINFO     framework_logger:test_cart_flow.py:103  UI Price  \u2192 790\nINFO     framework_logger:test_cart_flow.py:104  API Price \u2192 790\nINFO     framework_logger:test_cart_flow.py:105  DB Price  \u2192 790\n\n&#34;}]}, &#34;renderCollapsed&#34;: [&#34;passed&#34;], &#34;initialSort&#34;: &#34;result&#34;, &#34;title&#34;: &#34;report.html&#34;}"></div>
     <script>
       (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const { getCollapsedCategory, setCollapsedIds } = require('./storage.js')

@@ -1,0 +1,26 @@
+INFO     framework_logger:test_cart_Soft_assert_flow.py:21  DATA DRIVEN CONTRACT TEST STARTED
+INFO     framework_logger:test_cart_Soft_assert_flow.py:36 Category → Laptops
+INFO     framework_logger:test_cart_Soft_assert_flow.py:37 Expected Products → ['Sony vaio i5', 'Dell i7 8gb']
+INFO     framework_logger:home_page.py:16 Selecting category: Laptops
+INFO     framework_logger:home_page.py:28 Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+INFO     framework_logger:test_cart_Soft_assert_flow.py:51  UI Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+INFO     framework_logger:test_cart_Soft_assert_flow.py:72  API Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+INFO     framework_logger:test_cart_Soft_assert_flow.py:89  Matching Product → Sony vaio i5
+INFO     framework_logger:test_cart_Soft_assert_flow.py:107  DB Product → Sony vaio i5
+INFO     framework_logger:test_cart_Soft_assert_flow.py:119  UI Price  → 790
+INFO     framework_logger:test_cart_Soft_assert_flow.py:120  API Price → 790
+INFO     framework_logger:test_cart_Soft_assert_flow.py:121  DB Price  → 790
+INFO     framework_logger:test_cart_Soft_assert_flow.py:126 CONTRACT VALIDATION COMPLETED
+INFO     framework_logger:test_cart_Soft_assert_flow.py:21  DATA DRIVEN CONTRACT TEST STARTED
+INFO     framework_logger:test_cart_Soft_assert_flow.py:36 Category → Laptops
+INFO     framework_logger:test_cart_Soft_assert_flow.py:37 Expected Products → ['Sony vaio i5', 'Dell i7 8gb']
+INFO     framework_logger:home_page.py:16 Selecting category: Laptops
+INFO     framework_logger:home_page.py:28 Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+INFO     framework_logger:test_cart_Soft_assert_flow.py:51  UI Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+INFO     framework_logger:test_cart_Soft_assert_flow.py:72  API Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+INFO     framework_logger:test_cart_Soft_assert_flow.py:89  Matching Product → Sony vaio i5
+INFO     framework_logger:test_cart_Soft_assert_flow.py:107  DB Product → Sony vaio i5
+INFO     framework_logger:test_cart_Soft_assert_flow.py:119  UI Price  → 790
+INFO     framework_logger:test_cart_Soft_assert_flow.py:120  API Price → 790
+INFO     framework_logger:test_cart_Soft_assert_flow.py:121  DB Price  → 790
+INFO     framework_logger:test_cart_Soft_assert_flow.py:126 CONTRACT VALIDATION COMPLETED
