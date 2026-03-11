@@ -367,3 +367,34 @@
 [INFO] 07:42:36 | UI Title → Sony vaio i5
 [INFO] 07:42:36 | UI Price → 790
 [INFO] 07:42:36 | API Price → 790
+[INFO] 21:53:44 | API SCHEMA VALIDATION STARTED
+[INFO] 21:53:45 | Products Received → 7
+[INFO] 21:53:45 |  API SCHEMA VALIDATION PASSED
+[INFO] 21:53:45 | PRODUCT API SCHEMA TEST STARTED
+[INFO] 21:53:45 |  Products Received → 7
+[INFO] 21:53:45 | PRODUCT API SCHEMA TEST PASSED
+[INFO] 21:53:47 |  CONTRACT TEST → Sony vaio i5
+[INFO] 21:53:47 | Selecting category: Laptops
+[INFO] 21:53:48 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 21:53:50 | UI Title → Sony vaio i5
+[INFO] 21:53:50 | UI Price → 790
+[INFO] 21:53:51 | API Price → 790
+[INFO] 21:53:54 |  CONTRACT TEST → Dell i7 8gb
+[INFO] 21:53:54 | Selecting category: Laptops
+[INFO] 21:53:55 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 21:53:56 | UI Title → Dell i7 8gb
+[INFO] 21:53:56 | UI Price → 700
+[INFO] 21:53:56 | API Price → 700
+[INFO] 21:54:02 | Reloading Home Page
+[INFO] 21:54:04 | Selecting category: Laptops
+[INFO] 21:54:04 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 21:54:07 | Reloading Home Page
+[INFO] 21:54:09 | Selecting category: Laptops
+[INFO] 21:54:09 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 21:54:13 | Reloading Home Page
+[INFO] 21:54:20 |  DATA DRIVEN CONTRACT TEST STARTED
+[INFO] 21:54:20 | Category → Laptops
+[INFO] 21:54:20 | Expected Products → ['Sony vaio i5', 'Dell i7 8gb']
+[INFO] 21:54:20 | Selecting category: Laptops
+[INFO] 21:54:21 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 21:54:21 |  UI Products → ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
