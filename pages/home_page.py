@@ -136,3 +136,8 @@ class HomePage(BasePage):
         #self.page.locator(".card").first.wait_for()
         Wait.for_visible(self.page, ".card")
 
+    def get_product_price(self):
+        return extract_price(
+            self.page.locator(".price-container").inner_text()
+        )
+

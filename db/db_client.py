@@ -38,3 +38,11 @@ class DBClient:
     def close(self):
         self.cursor.close()
         self.connection.close()
+
+    def get_product_price(self, product_name):
+        product = self.get_product_by_name(product_name)
+
+        if not product:
+            raise AssertionError(f"Product not found in DB: {product_name}")
+
+        return int(float(product["price"]))

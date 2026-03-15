@@ -73,35 +73,17 @@ def test_full_purchase_flow(pages, page, api_request, db_client, request):
 
             home.select_product(product_name)
             home.wait_for_product_details()
+            ui_price = home.get_product_price()
 
-            ui_price = extract_price(
-                page.locator(".price-container").inner_text()
-            )
-
-        with allure.step(" API Validation"):
-
+        with allure.step("API Validation"):
             api_category = CATEGORY_API_MAPPING[category]
 
-            api_products = api.get_products_by_category(api_category).get("Items", [])
-
-            api_product = next(
-                (p for p in api_products if p["title"].strip() == product_name.strip()),
-                None
-            )
-
-            Assert.not_empty(api_product)
-
-            api_price = int(float(api_product["price"]))
+            api_price = api.get_product_price(api_category, product_name)
 
             Assert.equals(ui_price, api_price)
 
-        with allure.step(" DB Validation"):
-
-            db_product = db_client.get_product_by_name(product_name)
-
-            Assert.not_empty(db_product)
-
-            db_price = int(float(db_product["price"]))
+        with allure.step("DB Validation"):
+            db_price = db_client.get_product_price(product_name)
 
             Assert.equals(api_price, db_price)
 

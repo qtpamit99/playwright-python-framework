@@ -14,3 +14,13 @@ class ProductAPI:
         assert response.status == 200, f"API failed: {response.status}"
 
         return response.json()
+
+    def get_product_price(self, category, product_name):
+        products = self.get_products_by_category(category).get("Items", [])
+
+        product = next(
+            (p for p in products if p["title"].strip() == product_name.strip()),
+            None
+        )
+
+        return int(float(product["price"]))

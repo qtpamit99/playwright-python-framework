@@ -418,3 +418,84 @@
 [INFO] 08:08:49 | Selecting category: Laptops
 [INFO] 08:08:49 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
 [INFO] 08:08:50 | Reloading Home Page
+[INFO] 11:56:34 |  DATA DRIVEN CONTRACT TEST STARTED
+[INFO] 11:56:34 | Category → Laptops
+[INFO] 11:56:34 | Expected Products → ['Sony vaio i5', 'Dell i7 8gb']
+[INFO] 11:56:34 | Selecting category: Laptops
+[INFO] 11:56:35 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 11:56:35 |  UI Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 11:56:36 |  API Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 11:56:36 |  Matching Product → Sony vaio i5
+[INFO] 11:56:36 |  DB Product → Sony vaio i5
+[INFO] 11:56:36 |  UI Price  → 790
+[INFO] 11:56:36 |  API Price → 790
+[INFO] 11:56:36 |  DB Price  → 790
+[INFO] 11:56:36 | CONTRACT VALIDATION COMPLETED
+[INFO] 11:56:37 | Reloading Home Page
+[INFO] 11:56:39 | Selecting category: Laptops
+[INFO] 11:56:39 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 11:56:42 | Reloading Home Page
+[INFO] 11:56:43 | Selecting category: Laptops
+[INFO] 11:56:43 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 11:56:46 | Reloading Home Page
+[INFO] 11:56:47 | Selecting category: Phones
+[INFO] 11:56:47 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 11:56:49 | Reloading Home Page
+[INFO] 11:56:50 | Selecting category: Phones
+[INFO] 11:56:50 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 11:56:53 | Reloading Home Page
+[INFO] 12:10:29 |  DATA DRIVEN CONTRACT TEST STARTED
+[INFO] 12:10:29 | Category → Laptops
+[INFO] 12:10:29 | Expected Products → ['Sony vaio i5', 'Dell i7 8gb']
+[INFO] 12:10:29 | Selecting category: Laptops
+[INFO] 12:10:30 | Products loaded: ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 12:10:30 |  UI Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 12:10:31 |  API Products → ['Sony vaio i5', 'Sony vaio i7', 'MacBook air', 'Dell i7 8gb', '2017 Dell 15.6 Inch', 'MacBook Pro']
+[INFO] 12:10:31 |  Matching Product → Sony vaio i5
+[INFO] 12:10:31 |  DB Product → Sony vaio i5
+[INFO] 12:10:31 |  UI Price  → 790
+[INFO] 12:10:31 |  API Price → 790
+[INFO] 12:10:31 |  DB Price  → 790
+[INFO] 12:10:31 | CONTRACT VALIDATION COMPLETED
+[INFO] 12:46:05 | Reloading Home Page
+[INFO] 12:46:07 | Selecting category: Laptops
+[INFO] 12:46:07 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:46:10 | Reloading Home Page
+[INFO] 12:46:11 | Selecting category: Laptops
+[INFO] 12:46:11 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:46:13 | Reloading Home Page
+[INFO] 12:46:14 | Selecting category: Phones
+[INFO] 12:46:14 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:46:17 | Reloading Home Page
+[INFO] 12:46:18 | Selecting category: Phones
+[INFO] 12:46:18 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:46:20 | Reloading Home Page
+[INFO] 12:53:55 | Reloading Home Page
+[INFO] 12:53:56 | Selecting category: Laptops
+[INFO] 12:53:57 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:55:37 | Reloading Home Page
+[INFO] 12:55:39 | Selecting category: Laptops
+[INFO] 12:55:39 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:55:42 | Reloading Home Page
+[INFO] 12:55:42 | Selecting category: Laptops
+[INFO] 12:55:42 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:55:45 | Reloading Home Page
+[INFO] 12:55:46 | Selecting category: Phones
+[INFO] 12:55:46 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:55:49 | Reloading Home Page
+[INFO] 12:55:50 | Selecting category: Phones
+[INFO] 12:55:50 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:55:53 | Reloading Home Page
+[INFO] 12:58:37 | Reloading Home Page
+[INFO] 12:58:39 | Selecting category: Laptops
+[INFO] 12:58:39 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:58:42 | Reloading Home Page
+[INFO] 12:58:43 | Selecting category: Laptops
+[INFO] 12:58:43 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:58:48 | Reloading Home Page
+[INFO] 12:58:49 | Selecting category: Phones
+[INFO] 12:58:49 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:58:51 | Reloading Home Page
+[INFO] 12:58:52 | Selecting category: Phones
+[INFO] 12:58:52 | Products loaded: ['Samsung galaxy s6', 'Nokia lumia 1520', 'Nexus 6', 'Samsung galaxy s7', 'Iphone 6 32gb', 'Sony xperia z5', 'HTC One M9', 'Sony vaio i5', 'Sony vaio i7']
+[INFO] 12:58:55 | Reloading Home Page
